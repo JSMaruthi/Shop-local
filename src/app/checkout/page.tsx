@@ -25,7 +25,9 @@ const paymentSchema = z.object({
     cardNumber: z.string().optional(),
     expiryDate: z.string().optional(),
     cvv: z.string().optional(),
-}).refine(data => {
+});
+
+const checkoutSchema = addressSchema.merge(paymentSchema).refine(data => {
     if (data.paymentMethod === 'Card') {
         return !!data.cardNumber && !!data.expiryDate && !!data.cvv;
     }
@@ -34,8 +36,6 @@ const paymentSchema = z.object({
     message: 'Card details are required for card payment.',
     path: ['cardNumber'], // you can specify which field to show the error on
 });
-
-const checkoutSchema = addressSchema.merge(paymentSchema);
 
 export default function CheckoutPage() {
   const { cartItems, totalPrice, clearCart } = useCart();
@@ -61,8 +61,6 @@ export default function CheckoutPage() {
         return;
     }
     
-    // Server action handles redirect, so no try/catch needed here for that.
-    // If createOrder fails before redirect, Next.js will handle the error.
     await createOrder({
         cartItems,
         shippingAddress: {
