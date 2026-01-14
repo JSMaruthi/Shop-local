@@ -10,7 +10,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { createOrder } from '@/actions/order';
-import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 
 const addressSchema = z.object({
@@ -40,7 +39,6 @@ const checkoutSchema = addressSchema.merge(paymentSchema);
 
 export default function CheckoutPage() {
   const { cartItems, totalPrice, clearCart } = useCart();
-  const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof checkoutSchema>>({
@@ -63,27 +61,22 @@ export default function CheckoutPage() {
         return;
     }
     
-    try {
-        await createOrder({
-            cartItems,
-            shippingAddress: {
-                street: values.street,
-                city: values.city,
-                state: values.state,
-                zip: values.zip,
-                country: values.country,
-            },
-            paymentMethod: values.paymentMethod,
-        });
-        clearCart();
-    } catch (error) {
-        // The server action redirects, but if it fails before redirecting, show an error.
-        toast({
-            title: 'Order failed',
-            description: 'There was a problem placing your order. Please try again.',
-            variant: 'destructive',
-        });
-    }
+    // Server action handles redirect, so no try/catch needed here for that.
+    // If createOrder fails before redirect, Next.js will handle the error.
+    await createOrder({
+        cartItems,
+        shippingAddress: {
+            street: values.street,
+            city: values.city,
+            state: values.state,
+            zip: values.zip,
+            country: values.country,
+        },
+        paymentMethod: values.paymentMethod,
+    });
+    // The cart is cleared on the server side now, then it redirects.
+    // We also clear it here to update the UI state immediately.
+    clearCart();
   }
 
   return (

@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import type { CartItem, ShippingAddress } from '@/lib/types';
+import { cookies } from 'next/headers';
 
 interface OrderData {
   cartItems: CartItem[];
@@ -18,12 +19,14 @@ export async function createOrder(data: OrderData) {
   // 3. Create an Order record in the database.
   // 4. If payment is by card, process payment with a payment gateway (e.g., Stripe).
   // 5. Decrease product stock.
-  // 6. Clear the user's cart.
-  // 7. Send a confirmation email.
+  // 6. Send a confirmation email.
 
   const orderId = `ORD-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 
   console.log(`Order ${orderId} created successfully.`);
+
+  // 7. Clear the user's cart from cookies.
+  cookies().set('cart', '[]');
 
   // For this simulation, we'll just redirect to a confirmation page.
   redirect(`/order-confirmation?orderId=${orderId}`);
