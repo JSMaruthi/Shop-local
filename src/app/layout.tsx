@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Poppins, PT_Sans } from 'next/font/google';
+import { Inter, Jost } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
@@ -12,16 +12,15 @@ export const metadata: Metadata = {
   description: 'A complete e-commerce experience built with Next.js.',
 };
 
-const poppins = Poppins({
+const fontJost = Jost({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-headline',
 });
 
-const ptSans = PT_Sans({
+const fontInter = Inter({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-pt-sans',
+  variable: '--font-body',
 });
 
 export default function RootLayout({
@@ -31,16 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
-      </head>
       <body
         className={cn(
           'min-h-screen bg-background font-body antialiased',
-          poppins.variable,
-          ptSans.variable
+          fontJost.variable,
+          fontInter.variable
         )}
       >
         <CartProvider>
