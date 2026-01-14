@@ -1,4 +1,11 @@
 import type { Product, Order, User } from './types';
+import { PlaceHolderImages } from './placeholder-images';
+
+const getImage = (id: string) => {
+  const image = PlaceHolderImages.find((img) => img.id === id);
+  return image ? image.imageUrl : `https://picsum.photos/seed/${id}/400/300`;
+};
+
 
 export const products: Product[] = [
   {
@@ -8,7 +15,7 @@ export const products: Product[] = [
     price: 699.99,
     category: 'Electronics',
     stock: 50,
-    imageUrl: 'https://picsum.photos/seed/1/400/300',
+    imageUrl: getImage('1'),
     imageHint: 'smartphone screen'
   },
   {
@@ -18,7 +25,7 @@ export const products: Product[] = [
     price: 199.99,
     category: 'Electronics',
     stock: 75,
-    imageUrl: 'https://picsum.photos/seed/2/400/300',
+    imageUrl: getImage('2'),
     imageHint: 'headphones audio'
   },
   {
@@ -28,7 +35,7 @@ export const products: Product[] = [
     price: 24.99,
     category: 'Fashion',
     stock: 200,
-    imageUrl: 'https://picsum.photos/seed/3/400/300',
+    imageUrl: getImage('3'),
     imageHint: 't-shirt fashion'
   },
   {
@@ -38,7 +45,7 @@ export const products: Product[] = [
     price: 89.99,
     category: 'Fashion',
     stock: 120,
-    imageUrl: 'https://picsum.photos/seed/4/400/300',
+    imageUrl: getImage('4'),
     imageHint: 'denim jeans'
   },
   {
@@ -48,7 +55,7 @@ export const products: Product[] = [
     price: 129.99,
     category: 'Footwear',
     stock: 90,
-    imageUrl: 'https://picsum.photos/seed/5/400/300',
+    imageUrl: getImage('5'),
     imageHint: 'running shoes'
   },
   {
@@ -58,7 +65,7 @@ export const products: Product[] = [
     price: 149.99,
     category: 'Footwear',
     stock: 60,
-    imageUrl: 'https://picsum.photos/seed/6/400/300',
+    imageUrl: getImage('6'),
     imageHint: 'high heels'
   },
   {
@@ -68,7 +75,7 @@ export const products: Product[] = [
     price: 15.99,
     category: 'Books',
     stock: 150,
-    imageUrl: 'https://picsum.photos/seed/7/400/300',
+    imageUrl: getImage('7'),
     imageHint: 'fantasy book'
   },
   {
@@ -78,7 +85,7 @@ export const products: Product[] = [
     price: 39.99,
     category: 'Books',
     stock: 100,
-    imageUrl: 'https://picsum.photos/seed/8/400/300',
+    imageUrl: getImage('8'),
     imageHint: 'coding book'
   },
   {
@@ -88,7 +95,7 @@ export const products: Product[] = [
     price: 1299.99,
     category: 'Electronics',
     stock: 30,
-    imageUrl: 'https://picsum.photos/seed/9/400/300',
+    imageUrl: getImage('9'),
     imageHint: 'laptop technology'
   },
   {
@@ -98,7 +105,7 @@ export const products: Product[] = [
     price: 249.99,
     category: 'Fashion',
     stock: 45,
-    imageUrl: 'https://picsum.photos/seed/10/400/300',
+    imageUrl: getImage('10'),
     imageHint: 'leather jacket'
   },
   {
@@ -108,7 +115,7 @@ export const products: Product[] = [
     price: 79.99,
     category: 'Footwear',
     stock: 180,
-    imageUrl: 'https://picsum.photos/seed/11/400/300',
+    imageUrl: getImage('11'),
     imageHint: 'sneakers footwear'
   },
   {
@@ -118,7 +125,7 @@ export const products: Product[] = [
     price: 19.99,
     category: 'Books',
     stock: 130,
-    imageUrl: 'https://picsum.photos/seed/12/400/300',
+    imageUrl: getImage('12'),
     imageHint: 'science fiction'
   },
   {
@@ -128,7 +135,7 @@ export const products: Product[] = [
     price: 499.99,
     category: 'Home & Kitchen',
     stock: 40,
-    imageUrl: 'https://picsum.photos/seed/13/400/300',
+    imageUrl: getImage('13'),
     imageHint: 'coffee maker'
   },
   {
@@ -138,7 +145,7 @@ export const products: Product[] = [
     price: 179.99,
     category: 'Home & Kitchen',
     stock: 65,
-    imageUrl: 'https://picsum.photos/seed/14/400/300',
+    imageUrl: getImage('14'),
     imageHint: 'cookware kitchen'
   }
 ];
